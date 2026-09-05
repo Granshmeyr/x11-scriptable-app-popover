@@ -12,7 +12,7 @@ _main() {
 	local elapsed_ms=0
 
 	while [[ "$elapsed_ms" -lt "$TRY_TO_DETECT_CREATED_WINDOW_TIMEOUT_MS" ]]; do
-		wid="$(search_wid_from_class "$CREATED_WINDOW_CLASS")"
+		wid="$(search_wid_from_class "$CREATED_WINDOW_CLASS_FROM_XPROP")"
 
 		if [[ -n "$wid" ]]; then
 			break
@@ -25,7 +25,7 @@ _main() {
 
 	if [[ -z "$wid" ]]; then
 		err "'$create_window' in 'config.sh' did not create a window \
-			with class '$CREATED_WINDOW_CLASS'."
+			with class '$CREATED_WINDOW_CLASS_FROM_XPROP'."
 
 		exit 1
 	fi

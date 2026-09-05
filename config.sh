@@ -1,6 +1,6 @@
 _configure_stuff_in_here() {
 	TRY_TO_DETECT_CREATED_WINDOW_TIMEOUT_MS=1000
-	CREATED_WINDOW_CLASS="google-chrome"
+	CREATED_WINDOW_CLASS_FROM_XPROP="google-chrome"
 
 	create_window() {
 		google-chrome-stable \
@@ -17,13 +17,10 @@ _configure_stuff_in_here() {
 	pre_show() { :; }
 
 	post_show() {
-		set_window_rect "0" "0" "3840" "2160"
 		icesh -window "$(get_wid)" setLayer OnTop
 	}
 
-	pre_hide() {
-		set_window_rect "0" "0" "3840" "2160"
-	}
+	pre_hide() { :; }
 
 	post_hide() { :; }
 }
