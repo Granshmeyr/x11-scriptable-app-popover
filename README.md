@@ -1,5 +1,5 @@
 # X11 Scriptable App Popover
-This collection of scripts provides a simple api for programatically docking/undocking an app from the status tray with custom callbacks. After configuring, you could press a hotkey to popup a window, maximize it, and set it to "Always On Top", or something.
+This collection of scripts provides a simple api for programatically docking/undocking an app from the status tray with custom callbacks. You can use it to have a set-size Discord window popover with a hotkey in the middle of the screen, or something.
 
 To configure, modify the stuff inside `_configure_stuff_in_here` within `config.sh` . See the `# window` section within `util.sh` for methods that are available inside callbacks like `post_dock`.
 
@@ -20,7 +20,6 @@ To configure, modify the stuff inside `_configure_stuff_in_here` within `config.
 ## Tips
 - You should turn off all the options in KDocker for the best experience. Right click the docked window icon in the status tray > Options > *disable every checkable option* > Save settings > Global (all new).
 - Only works with one window at a time, but you can create multiple copies of this repo as a workaround.
-- If you check the source `config.sh`, you'll notice three usages of `set_window_rect`. KDocker remembers the window rect weirdly so if you want a consistent size you should mimic this.
 
 ## Dependencies
 - bash

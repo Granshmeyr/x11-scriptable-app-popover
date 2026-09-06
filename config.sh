@@ -11,20 +11,16 @@ _configure_stuff_in_here() {
 	pre_dock() { :; }
 
 	post_dock() {
-		set_window_rect "0" "0" "3840" "2160"
 		hide_window
 	}
 
 	pre_show() { :; }
 
 	post_show() {
-		set_window_rect "0" "0" "3840" "2160"
 		icesh -window "$(get_wid)" setLayer OnTop
 	}
 
-	pre_hide() {
-		set_window_rect "0" "0" "3840" "2160"
-	}
+	pre_hide() { :; }
 
 	post_hide() { :; }
 }
