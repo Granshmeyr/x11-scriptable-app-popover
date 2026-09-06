@@ -5,7 +5,7 @@ _main() {
 		if [[ "$(get_window_state)" = "Normal" ]]; then
 			return 0
 		fi
-		
+
 		return 1
 	}
 
@@ -86,8 +86,8 @@ _main() {
 		local arg_arg="$2"
 
 		dbus-send --session --print-reply --type=method_call \
-		--dest=com.kdocker.KDocker /manage \
-		"com.kdocker.KdockerInterface.$arg_method" "$arg_arg"
+			--dest=com.kdocker.KDocker /manage \
+			"com.kdocker.KdockerInterface.$arg_method" "$arg_arg"
 	}
 
 	get_window_state() {
@@ -113,7 +113,6 @@ _main() {
 		bc -l <<< "scale=3; $arg_ms / 1000"
 	}
 }
-
 
 if [[ "$APP_POPOVER" =~ ^-?0+$ ]]; then
 	_main
