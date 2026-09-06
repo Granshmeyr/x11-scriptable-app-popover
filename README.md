@@ -20,6 +20,7 @@ To configure, modify the stuff inside `_configure_stuff_in_here` within `config.
 ## Tips
 - You should turn off all the options in KDocker for the best experience. Right click the docked window icon in the status tray > Options > *disable every checkable option* > Save settings > Global (all new).
 - Only works with one window at a time, but you can create multiple copies of this repo as a workaround.
+- If you want to ensure the window has the same rect every time it pops up, copy the `set_window_rect` usage inside the source `config.sh`.
 
 ## Dependencies
 - bash
