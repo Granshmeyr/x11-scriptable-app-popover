@@ -1,4 +1,8 @@
-_configure_stuff_in_here() {
+trap "unset -f main" EXIT
+
+main() {
+	# configure variables and functions below
+
 	TRY_TO_DETECT_CREATED_WINDOW_TIMEOUT_MS=1000
 	CREATED_WINDOW_CLASS_FROM_XPROP="google-chrome"
 
@@ -30,7 +34,7 @@ _configure_stuff_in_here() {
 }
 
 if [[ "$APP_POPOVER" =~ ^-?0+$ ]]; then
-	_configure_stuff_in_here
+	main
 else
 	echo "This file cannot be ran directly." >&2
 

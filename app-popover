@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-_main() {
+trap "unset -f main" EXIT
+
+main() {
 	local arg_name="$1"
 	APP_POPOVER=0
 
@@ -68,4 +70,5 @@ _main() {
 	source "$mode_file"
 }
 
-_main "$1"
+main "$1"
+
