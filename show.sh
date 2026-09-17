@@ -1,6 +1,12 @@
-trap "unset -f main" EXIT
-
 main() {
+	unset -f main
+
+	if [[ ! "$APP_POPOVER" =~ ^-?0+$ ]]; then
+		echo "This file cannot be ran directly. Use 'app-popover launch' instead." >&2
+
+		exit 1
+	fi
+
 	using_util
 
 	if is_window_visible; then
@@ -10,10 +16,4 @@ main() {
 	show_window
 }
 
-if [[ "$APP_POPOVER" =~ ^-?0+$ ]]; then
-	main
-else
-	echo "This file cannot be ran directly. Use 'app-popover show' instead." >&2
-
-	exit 1
-fi
+main

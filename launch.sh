@@ -1,6 +1,12 @@
-trap "unset -f main" EXIT
-
 main() {
+	unset -f main
+
+	if [[ ! "$APP_POPOVER" =~ ^-?0+$ ]]; then
+		echo "This file cannot be ran directly. Use 'app-popover launch' instead." >&2
+
+		exit 1
+	fi
+
 	using_config
 	using_util
 
@@ -39,10 +45,4 @@ main() {
 	post_dock
 }
 
-if [[ "$APP_POPOVER" =~ ^-?0+$ ]]; then
-	main
-else
-	echo "This file cannot be ran directly. Use 'app-popover launch' instead." >&2
-
-	exit 1
-fi
+main

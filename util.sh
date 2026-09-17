@@ -1,6 +1,12 @@
-trap "unset -f main" EXIT
-
 main() {
+	unset -f main
+
+	if [[ ! "$APP_POPOVER" =~ ^-?0+$ ]]; then
+		echo "This file cannot be ran directly." >&2
+
+		exit 1
+	fi
+
 	# window
 
 	is_window_visible() {
@@ -116,10 +122,4 @@ main() {
 	}
 }
 
-if [[ "$APP_POPOVER" =~ ^-?0+$ ]]; then
-	main
-else
-	echo "This file cannot be ran directly." >&2
-
-	exit 1
-fi
+main

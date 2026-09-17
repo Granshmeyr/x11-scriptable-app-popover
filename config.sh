@@ -1,5 +1,3 @@
-trap "unset -f main" EXIT
-
 main() {
 	# configure variables and functions below
 
@@ -35,8 +33,9 @@ main() {
 
 if [[ "$APP_POPOVER" =~ ^-?0+$ ]]; then
 	main
+	unset -f main
 else
 	echo "This file cannot be ran directly." >&2
-
+	unset -f main
 	exit 1
 fi
