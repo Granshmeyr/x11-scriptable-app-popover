@@ -42,6 +42,6 @@ main() {
 		local padded
 
 		printf -v padded "%04d" "${arg_ms}"
-		out_sec="${padded:0:-3}.${padded:-3}"
+		out_sec="${padded:0:-3}.${padded: -3}"
 	}
 }; g_iife main

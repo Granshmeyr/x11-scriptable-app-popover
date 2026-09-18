@@ -13,7 +13,7 @@ main() {
 	local arg_command="${1}"
 
 	if [[ -z "${arg_command}" ]]; then
-		g_err "A command must be provided i.e. 'app-popover launch'."
+		g_err "A command must be provided i.e. 'app-popover.sh launch'."
 
 		exit 1
 	fi

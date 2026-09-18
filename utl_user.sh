@@ -1,7 +1,7 @@
 main() {
-	is_window_visible() {
-		g_import "utl_internal" from "${app_root}"
+	g_import "cfg, utl_internal" from "${app_root}"
 
+	is_window_visible() {
 		local window_state; utl_get_window_state window_state
 
 		if [[ "${window_state}" = "Normal" ]]; then
@@ -12,16 +12,12 @@ main() {
 	}
 
 	dock_window() {
-		g_import "utl_internal" from "${app_root}"
-
 		local wid; get_wid wid
 
 		utl_kdocker_call "dockWindowId" "uint32:${wid}"
 	}
 
 	show_window() {
-		g_import "cfg, utl_internal" from "${app_root}"
-
 		local desktop="$(xdotool get_desktop)"
 		local wid; get_wid wid
 
@@ -32,8 +28,6 @@ main() {
 	}
 
 	hide_window() {
-		g_import "cfg, utl_internal" from "${app_root}"
-
 		local wid; get_wid wid
 
 		pre_hide
@@ -74,8 +68,6 @@ main() {
 	}
 
 	get_wid() {
-		g_import "utl_internal" from "${app_root}"
-
 		local -n out_wid="${1}"
 		local wid_file; utl_get_wid_file wid_file
 

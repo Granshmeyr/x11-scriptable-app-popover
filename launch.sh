@@ -1,5 +1,5 @@
 main() {
-	g_import "cfg, utl_internal" from "${app_root}"
+	g_import "cfg, utl_internal, utl_user" from "${app_root}"
 
 	local CREATE_WINDOW="create_window"
 	local desktop="$(xdotool get_desktop)"
@@ -8,7 +8,8 @@ main() {
 
 	local wid=""
 	local poll_ms=250
-	local poll_sec; utl_ms_to_sec poll_sec poll_ms
+	local poll_sec; utl_ms_to_sec poll_sec "${poll_ms}"
+	echo "poll_sec is ${poll_sec}"
 	local elapsed_ms=0
 
 	while [[ "${elapsed_ms}" -lt "${TRY_TO_DETECT_CREATED_WINDOW_TIMEOUT_MS}" ]]; do
@@ -24,7 +25,7 @@ main() {
 	done
 
 	if [[ -z "${wid}" ]]; then
-		g_err "'${create_window}' in 'config.sh' did not create a window with class '${CREATED_WINDOW_CLASS_FROM_XPROP}'."
+		g_err "'${CREATE_WINDOW}' in 'config.sh' did not create a window with class '${CREATED_WINDOW_CLASS_FROM_XPROP}'."
 
 		exit 1
 	fi
