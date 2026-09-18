@@ -9,7 +9,6 @@ main() {
 	local wid=""
 	local poll_ms=250
 	local poll_sec; utl_ms_to_sec poll_sec "${poll_ms}"
-	echo "poll_sec is ${poll_sec}"
 	local elapsed_ms=0
 
 	while [[ "${elapsed_ms}" -lt "${CFG_TRY_TO_DETECT_CREATED_WINDOW_TIMEOUT_MS}" ]]; do
