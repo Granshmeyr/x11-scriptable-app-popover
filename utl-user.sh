@@ -1,6 +1,4 @@
 main() {
-	g_import "cfg, utl_internal" from "${app_root}"
-
 	is_window_visible() {
 		local window_state; utl_get_window_state window_state
 

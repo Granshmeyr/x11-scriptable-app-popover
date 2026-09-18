@@ -1,3 +1,19 @@
+g_is_fn() {
+	local arg_fn_name="${1}"
+
+	declare -F -- "${arg_fn_name}" &> /dev/null
+}
+
+g_expect() {
+	local arg_expr="${1}"
+	local arg_msg="${2:-"Expect failed: ${arg_expr}"}"
+
+	if ! eval "${arg_expr}"; then
+		g_err "${arg_msg}"
+		exit 1
+	fi
+}
+
 g_iife() {
 	local arg_fn="${1}"
 	shift
