@@ -1,15 +1,5 @@
 main() {
-	unset -f main
-
-	if [[ ! "$APP_POPOVER" =~ ^-?0+$ ]]; then
-		echo "This file cannot be ran directly. Use 'app-popover toggle' instead." >&2
-
-		exit 1
-	fi
-
-	using_util
+	g_import "utl_user" from "${app_root}"
 
 	toggle_window
-}
-
-main
+}; g_iife main

@@ -20,8 +20,10 @@ main() {
 	pre_show() { :; }
 
 	post_show() {
+		local wid; get_wid wid
+
 		set_window_rect "0" "0" "3840" "2160"
-		icesh -window "$(get_wid)" setLayer OnTop
+		icesh -window "${wid}" setLayer OnTop
 	}
 
 	pre_hide() {
@@ -29,13 +31,4 @@ main() {
 	}
 
 	post_hide() { :; }
-}
-
-if [[ "$APP_POPOVER" =~ ^-?0+$ ]]; then
-	main
-	unset -f main
-else
-	echo "This file cannot be ran directly." >&2
-	unset -f main
-	exit 1
-fi
+}; g_iife main

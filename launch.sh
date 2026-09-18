@@ -1,48 +1,38 @@
 main() {
-	unset -f main
-
-	if [[ ! "$APP_POPOVER" =~ ^-?0+$ ]]; then
-		echo "This file cannot be ran directly. Use 'app-popover launch' instead." >&2
-
-		exit 1
-	fi
-
-	using_config
-	using_util
+	g_import "cfg, utl_internal" from "${app_root}"
 
 	local CREATE_WINDOW="create_window"
 	local desktop="$(xdotool get_desktop)"
 
-	$CREATE_WINDOW &
+	"${CREATE_WINDOW}" &
 
 	local wid=""
 	local poll_ms=250
+	local poll_sec; utl_ms_to_sec poll_sec poll_ms
 	local elapsed_ms=0
 
-	while [[ "$elapsed_ms" -lt "$TRY_TO_DETECT_CREATED_WINDOW_TIMEOUT_MS" ]]; do
-		wid="$(search_wid_from_class "$CREATED_WINDOW_CLASS_FROM_XPROP")"
+	while [[ "${elapsed_ms}" -lt "${TRY_TO_DETECT_CREATED_WINDOW_TIMEOUT_MS}" ]]; do
+		utl_search_wid_from_class wid "${CREATED_WINDOW_CLASS_FROM_XPROP}"
 
-		if [[ -n "$wid" ]]; then
+		if [[ -n "${wid}" ]]; then
 			break
 		fi
 
-		sleep "$(ms_to_sec "$poll_ms")"
+		sleep "${poll_sec}"
 
 		elapsed_ms="$((elapsed_ms + poll_ms))"
 	done
 
-	if [[ -z "$wid" ]]; then
-		err "'$create_window' in 'config.sh' did not create a window \
-			with class '$CREATED_WINDOW_CLASS_FROM_XPROP'."
+	if [[ -z "${wid}" ]]; then
+		g_err "'${create_window}' in 'config.sh' did not create a window \
+			with class '${CREATED_WINDOW_CLASS_FROM_XPROP}'."
 
 		exit 1
 	fi
 
-	xdotool set_desktop "$desktop"
-	set_wid "$wid"
+	xdotool set_desktop "${desktop}"
+	utl_set_wid "${wid}"
 	pre_dock
 	dock_window
 	post_dock
-}
-
-main
+}; g_iife main
