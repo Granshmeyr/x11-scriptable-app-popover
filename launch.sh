@@ -1,7 +1,7 @@
 main() {
 	g_import "cfg, utl_internal, utl_user" from "${app_root}"
 
-	local CREATE_WINDOW="create_window"
+	local CREATE_WINDOW="cfg_create_window"
 	local desktop="$(xdotool get_desktop)"
 
 	"${CREATE_WINDOW}" &
@@ -12,8 +12,8 @@ main() {
 	echo "poll_sec is ${poll_sec}"
 	local elapsed_ms=0
 
-	while [[ "${elapsed_ms}" -lt "${TRY_TO_DETECT_CREATED_WINDOW_TIMEOUT_MS}" ]]; do
-		utl_search_wid_from_class wid "${CREATED_WINDOW_CLASS_FROM_XPROP}"
+	while [[ "${elapsed_ms}" -lt "${CFG_TRY_TO_DETECT_CREATED_WINDOW_TIMEOUT_MS}" ]]; do
+		utl_search_wid_from_class wid "${CFG_CREATED_WINDOW_CLASS_FROM_XPROP}"
 
 		if [[ -n "${wid}" ]]; then
 			break
@@ -25,14 +25,14 @@ main() {
 	done
 
 	if [[ -z "${wid}" ]]; then
-		g_err "'${CREATE_WINDOW}' in 'config.sh' did not create a window with class '${CREATED_WINDOW_CLASS_FROM_XPROP}'."
+		g_err "'${CREATE_WINDOW}' in 'config.sh' did not create a window with class '${CFG_CREATED_WINDOW_CLASS_FROM_XPROP}'."
 
 		exit 1
 	fi
 
 	xdotool set_desktop "${desktop}"
 	utl_set_wid "${wid}"
-	pre_dock
+	cfg_pre_dock
 	dock_window
-	post_dock
+	cfg_post_dock
 }; g_iife main

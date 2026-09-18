@@ -21,18 +21,18 @@ main() {
 		local desktop="$(xdotool get_desktop)"
 		local wid; get_wid wid
 
-		pre_show
+		cfg_pre_show
 		utl_kdocker_call "showWindow" "uint32:${wid}"
 		xdotool set_desktop_for_window "${wid}" "${desktop}" windowactivate "${wid}"
-		post_show
+		cfg_post_show
 	}
 
 	hide_window() {
 		local wid; get_wid wid
 
-		pre_hide
+		cfg_pre_hide
 		utl_kdocker_call "hideWindow" "uint32:${wid}"
-		post_hide
+		cfg_post_hide
 	}
 
 	toggle_window() {
