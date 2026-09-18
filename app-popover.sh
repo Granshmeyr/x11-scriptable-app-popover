@@ -24,8 +24,7 @@ main() {
 		exit 1
 	fi
 
-	g_import "cfg, utl-user, utl-internal" from "${app_root}"
-	g_import "cmd-${arg_command}" from "${app_root}"
+	g_import "cfg, utl-user, utl-internal, cmd-${arg_command}" from "${app_root}"
 	g_expect 'g_is_fn "run_command"'
 
 	run_command
