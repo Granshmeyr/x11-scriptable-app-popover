@@ -11,7 +11,6 @@ trap "g_err \"An error occured during execution.\"" ERR
 
 main() {
 	local arg_command="${1}"
-	APP_POPOVER=0
 
 	if [[ -z "${arg_command}" ]]; then
 		g_err "A command must be provided i.e. 'app-popover launch'."

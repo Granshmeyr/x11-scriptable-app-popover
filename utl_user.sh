@@ -50,10 +50,10 @@ main() {
 	}
 
 	set_window_rect() {
-		local arg_x="$1"
-		local arg_y="$2"
-		local arg_width="$3"
-		local arg_height="$4"
+		local arg_x="${1}"
+		local arg_y="${2}"
+		local arg_width="${3}"
+		local arg_height="${4}"
 		local wid; get_wid wid
 
 		wmctrl -i -r "${wid}" -e "0,${arg_x},${arg_y},${arg_width},${arg_height}"

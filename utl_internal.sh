@@ -6,15 +6,15 @@ main() {
 	}
 
 	utl_set_wid() {
-		local arg_value="$1"
+		local arg_value="${1}"
 		local wid_file; utl_get_wid_file wid_file
 
 		echo "$arg_value" > "${wid_file}"
 	}
 
 	utl_kdocker_call() {
-		local arg_method="$1"
-		local arg_arg="$2"
+		local arg_method="${1}"
+		local arg_arg="${2}"
 
 		dbus-send --session --print-reply --type=method_call \
 			--dest=com.kdocker.KDocker /manage \

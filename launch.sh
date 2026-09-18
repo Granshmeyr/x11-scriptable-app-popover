@@ -24,8 +24,7 @@ main() {
 	done
 
 	if [[ -z "${wid}" ]]; then
-		g_err "'${create_window}' in 'config.sh' did not create a window \
-			with class '${CREATED_WINDOW_CLASS_FROM_XPROP}'."
+		g_err "'${create_window}' in 'config.sh' did not create a window with class '${CREATED_WINDOW_CLASS_FROM_XPROP}'."
 
 		exit 1
 	fi
