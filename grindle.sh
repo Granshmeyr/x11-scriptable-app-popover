@@ -1,3 +1,32 @@
+# script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+
+g_launch_and_get_wid_by_class() {
+	local -n arg_out_wid="${1}"
+	local arg_cmd="${2}"
+	local arg_class="${3}"
+	local arg_timeout_secs="${4:-5}"
+
+	eval "${arg_cmd}" &
+
+	local wid=""
+	local elapsed=0
+	local step=1
+
+	while [ -z "${wid}" ]; do
+		if [ $((elapsed * step)) -ge $((arg_timeout_secs * 10)) ]; then
+			g_err "Timed out waiting for window class '${arg_class}'."
+
+			return 1
+		fi
+
+		sleep 0.1
+		elapsed=$((elapsed + 1))
+		wid=$(xdotool search --onlyvisible --class "${arg_class}" 2>/dev/null | tail -n 1)
+	done
+
+	arg_out_wid="${wid}"
+}
+
 g_is_fn() {
 	local arg_fn_name="${1}"
 
@@ -6,10 +35,11 @@ g_is_fn() {
 
 g_expect() {
 	local arg_expr="${1}"
-	local arg_msg="${2:-"Expect failed: ${arg_expr}"}"
+	local arg_msg="${2}"
 
 	if ! eval "${arg_expr}"; then
-		g_err "${arg_msg}"
+		g_err "Expect failed: ${arg_msg:-$arg_expr}"
+
 		exit 1
 	fi
 }
@@ -20,12 +50,6 @@ g_iife() {
 
 	"${arg_fn}" "${@}"
 	unset -f "${arg_fn}"
-}
-
-g_get_own_dir() {
-	local out_dir="${1}"
-
-	out_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 }
 
 g_log() {
@@ -42,6 +66,7 @@ g_log() {
 
 	local depth=${#FUNCNAME[@]}
 	local i
+
 	for ((i = 1; i < depth; i++)); do
 		local func="${FUNCNAME[i]}"
 		local src="${BASH_SOURCE[i]##*/}"
@@ -57,16 +82,16 @@ g_log() {
 
 g_warn() {
 	local arg_msg="${1}"
-	local yellow='\033[0;33m'
-	local bold_yellow='\033[1;33m'
+	local yellow='\e[0;33m'
+	local bold_yellow='\e[1;33m'
 
 	g_log "WARNING" "${bold_yellow}" "${yellow}" "${arg_msg}"
 }
 
 g_err() {
 	local arg_msg="${1}"
-	local red='\033[0;31m'
-	local bold_red='\033[1;31m'
+	local red='\e[0;31m'
+	local bold_red='\e[1;31m'
 
 	g_log "ERROR" "${bold_red}" "${red}" "${arg_msg}"
 }

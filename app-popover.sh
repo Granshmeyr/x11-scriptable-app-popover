@@ -3,29 +3,29 @@
 set -e
 set -E
 
-app_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+app_root="${BASH_SOURCE%/*}"
 
 source "${app_root}/grindle.sh"
 
 trap "g_err \"An error occured during execution.\"" ERR
 
 main() {
-	local arg_command="${1}"
+	local _arg_command="${1}"
 
-	if [[ -z "${arg_command}" ]]; then
+	if [[ -z "${_arg_command}" ]]; then
 		g_err "A command must be provided i.e. 'app-popover.sh launch'."
 
 		exit 1
 	fi
 
-	if [[ ! "${arg_command}" =~ ^(show|hide|toggle|launch)$ ]]; then
-		g_err "Invalid command provided: '${arg_command}'."
+	if [[ ! "${_arg_command}" =~ ^(show|hide|toggle|launch)$ ]]; then
+		g_err "Invalid command provided: '${_arg_command}'."
 
 		exit 1
 	fi
 
-	g_import "cfg, utl-user, utl-internal, cmd-${arg_command}" from "${app_root}"
-	g_expect 'g_is_fn "run_command"'
+	g_import "cfg, utl-user, utl-internal, cmd-${_arg_command}" from "${app_root}"
+	g_expect 'g_is_fn "cmd_run"'
 
-	run_command
-}; g_iife main "${1}"
+	cmd_run
+}; g_iife main "${@}"

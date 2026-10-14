@@ -13,21 +13,21 @@ main() {
 	cfg_pre_dock() { :; }
 
 	cfg_post_dock() {
-		set_window_rect "0" "0" "3840" "2160"
-		hide_window
+		utl_set_window_rect "0" "0" "3840" "2160"
+		utl_hide_window
 	}
 
 	cfg_pre_show() { :; }
 
 	cfg_post_show() {
-		local wid; get_wid wid
+		local wid; utl_get_wid wid
 
-		set_window_rect "0" "0" "3840" "2160"
+		utl_set_window_rect "0" "0" "3840" "2160"
 		icesh -window "${wid}" setLayer OnTop
 	}
 
 	cfg_pre_hide() {
-		set_window_rect "0" "0" "3840" "2160"
+		utl_set_window_rect "0" "0" "3840" "2160"
 	}
 
 	cfg_post_hide() { :; }

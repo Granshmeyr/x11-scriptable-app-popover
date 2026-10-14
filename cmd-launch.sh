@@ -1,5 +1,5 @@
 main() {
-	run_command() {
+	cmd_run() {
 		local CREATE_WINDOW="cfg_create_window"
 		local desktop="$(xdotool get_desktop)"
 
@@ -31,7 +31,7 @@ main() {
 		xdotool set_desktop "${desktop}"
 		utl_set_wid "${wid}"
 		cfg_pre_dock
-		dock_window
+		utl_dock_window
 		cfg_post_dock
 	}
 }; g_iife main

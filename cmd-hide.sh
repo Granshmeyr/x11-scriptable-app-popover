@@ -1,9 +1,9 @@
 main() {
-	run_command() {
+	cmd_run() {
 		if ! is_window_visible; then
 			exit 0
 		fi
 
-		hide_window
+		utl_hide_window
 	}
 }; g_iife main

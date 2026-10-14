@@ -1,5 +1,5 @@
 main() {
-	run_command() {
-		toggle_window
+	cmd_run() {
+		utl_toggle_window
 	}
 }; g_iife main
