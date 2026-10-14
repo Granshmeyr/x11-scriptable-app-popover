@@ -1,5 +1,9 @@
 # script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
+g_root_err_trap() {
+	trap "g_err \"An error occured during execution.\"" ERR
+}
+
 g_launch_and_get_wid_by_class() {
 	local -n arg_out_wid="${1}"
 	local arg_cmd="${2}"

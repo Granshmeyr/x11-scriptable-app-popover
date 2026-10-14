@@ -7,7 +7,7 @@ app_root="${BASH_SOURCE%/*}"
 
 source "${app_root}/grindle.sh"
 
-trap "g_err \"An error occured during execution.\"" ERR
+g_root_err_trap
 
 main() {
 	local _arg_command="${1}"

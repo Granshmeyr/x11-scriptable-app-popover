@@ -1,6 +1,6 @@
 main() {
 	cmd_run() {
-		if ! is_window_visible; then
+		if ! utl_is_window_visible; then
 			exit 0
 		fi
 
