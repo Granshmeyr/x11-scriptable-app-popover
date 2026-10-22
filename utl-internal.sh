@@ -2,14 +2,14 @@ main() {
 	utl_get_wid_file() {
 		local -n arg_out_file="${1}"
 
-		arg_out_file="${app_root}/wid.txt"
+		arg_out_file="${app_root}/wid_${CFG_ID}.txt"
 	}
 
 	utl_set_wid() {
 		local arg_value="${1}"
 		local wid_file; utl_get_wid_file wid_file
 
-		echo "$arg_value" > "${wid_file}"
+		echo "${arg_value}" > "${wid_file}"
 	}
 
 	utl_kdocker_call() {

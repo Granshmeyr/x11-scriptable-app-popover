@@ -1,6 +1,7 @@
 main() {
 	# configure variables and functions below
 
+	CFG_ID="chrome"
 	CFG_TRY_TO_DETECT_CREATED_WINDOW_TIMEOUT_MS=1000
 	CFG_CREATED_WINDOW_CLASS_FROM_XPROP="google-chrome"
 

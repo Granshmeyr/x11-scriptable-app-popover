@@ -16,6 +16,7 @@ main() {
 	}
 
 	utl_show_window() {
+		local wid; utl_get_wid wid
 		local desktop="$(xdotool get_desktop)"
 		local wid; utl_get_wid wid
 
