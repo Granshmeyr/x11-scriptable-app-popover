@@ -3,7 +3,7 @@
 set -e
 set -E
 
-app_root="${BASH_SOURCE%/*}"
+app_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
 source "${app_root}/grindle.sh"
 
