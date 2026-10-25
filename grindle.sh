@@ -12,11 +12,12 @@ g_launch_and_get_wid_by_class() {
 
 	eval "${arg_cmd}" &
 
-	local wid=""
 	local elapsed=0
 	local step=1
 
-	while [ -z "${wid}" ]; do
+	arg_out_wid=""
+
+	while [ -z "${arg_out_wid}" ]; do
 		if [ $((elapsed * step)) -ge $((arg_timeout_secs * 10)) ]; then
 			g_err "Timed out waiting for window class '${arg_class}'."
 
@@ -25,10 +26,9 @@ g_launch_and_get_wid_by_class() {
 
 		sleep 0.1
 		elapsed=$((elapsed + 1))
-		wid=$(xdotool search --onlyvisible --class "${arg_class}" 2>/dev/null | tail -n 1)
+		arg_out_wid=$(xdotool search --onlyvisible \
+				--class "${arg_class}" 2>/dev/null | tail -n 1)
 	done
-
-	arg_out_wid="${wid}"
 }
 
 g_is_fn() {
